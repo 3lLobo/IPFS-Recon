@@ -13,10 +13,10 @@ const colors = {
 export const myTheme = extendTheme({
   colors,
   initialColorMode: 'dark',
-  fonts: {
-    heading: 'Manjari',
-    body: 'Manjari',
-  },
+  // fonts: {
+  //   heading: 'Manjari',
+  //   body: 'Manjari',
+  // },
   config: {
     initialColorMode: 'dark',
   },

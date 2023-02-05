@@ -27,12 +27,11 @@ export const IpfsCard = ({ ls, idx }) => {
   const isSelect = store.selectedIdx.includes(idx)
 
   const attrs = ['name', 'size', 'type']
-  const spacing = 1
   const bg = useColorModeValue('bg-snow-muted', 'ring-1 ring-slate-900 bg-aqua-muted ')
 
   function onCardClick() {
     if (store.selectedIdx.includes(idx)) {
-      // dispatch(unselectFile({ idx }))
+      dispatch(unselectFile({ idx }))
     } else {
       // Trigger the download of the clicked file
       trigger({ cid: ls.cid }, true)
@@ -59,7 +58,7 @@ export const IpfsCard = ({ ls, idx }) => {
 
   return (
     <Box
-      className={`${bg} flex flex-col w-full max-w-[20rem] p-1 mb-3 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+      className={`${bg} flex flex-col w-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       onClick={onCardClick}
     >
       <ScanButton idx={idx} showButton={isSelect} />
@@ -86,7 +85,7 @@ export const IpfsCard = ({ ls, idx }) => {
         <List className="w-full h-full col-span-1">
           {attrs.map((attr, i) => {
             return (
-              <ListItem key={uuid()} title={ls[attr]?.length > 11 ? ls[attr] : null}>
+              <ListItem key={uuid()} title={ls[attr]?.length > 11 ? ls[attr] : null} className="truncate">
                 {(attr === 'size' ? fileSize : ls[attr]) || 'unknown'}
               </ListItem>
             )

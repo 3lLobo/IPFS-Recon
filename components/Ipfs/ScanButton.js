@@ -44,7 +44,7 @@ export default function ScanButton({ idx, showButton }) {
       transition={{ ease: "easeInOut", duration: .5 }}
       variants={{
         visible: { opacity: 1, y: 0 },
-        hidden: { opacity: 0, y: 100 },
+        hidden: { opacity: 0, y: 500 },
       }}
     >
       <Box className="absolute z-30 h-full w-full flex flex-col justify-center items-center">

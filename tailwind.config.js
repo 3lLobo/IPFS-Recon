@@ -46,8 +46,8 @@ module.exports = {
         'washed-blue': '#F0F6FA',
       },
       backgroundImage: {
-        'mybg-light': 'linear-gradient(193deg, #edf0f4, 50%, #9ad4db)',
-        'mybg-dark': 'linear-gradient(193deg, #244e66, 20%, #0f172a)',
+        'mybg-light': 'linear-gradient(193deg, #edf0f4, 26%, #69c4cd)',
+        'mybg-dark': 'linear-gradient(193deg, #244e66, 20%, #080031)',
       },
     },
   },

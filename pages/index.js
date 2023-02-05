@@ -13,6 +13,14 @@ import { Text } from '@chakra-ui/layout'
 import { v4 } from 'uuid'
 import { Button } from '@chakra-ui/button'
 import { DopeAlter } from '../components/Alert/dopeAlert'
+import { Montserrat, Montserrat_Alternates, Poppins } from '@next/font/google'
+
+
+const montserrat = Montserrat({
+  weights: [400, 500, 600, 700],
+  preload: false,
+})
+
 
 export default function Home({ buckets }) {
   const store = useSelector((state) => state.ipfsRedux)
@@ -32,7 +40,7 @@ export default function Home({ buckets }) {
         </div>
       )}
       <HomeWrapper>
-        <div className="grid grid-flow-col grid-cols-5 w-full gap-11">
+        <div className={"grid grid-flow-col grid-cols-5 w-full gap-11 " + montserrat.className}>
           <div
             className='py-3 flex flex-col flex-nowrap sm:py-11 text-sm w-full col-span-2 overflow-auto'
           >
