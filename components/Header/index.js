@@ -30,9 +30,10 @@ export default function Header() {
                   <Image height={66} src="/filecoin_cool.png" alt="FLsvg" />
                 </motion.div>
               </Box>
-              <Box className="hidden sm:flex sm:ml-6 text-snow align-middle justify-center mt-5">
-                <Text className=" text-2xl font-bold h-full">Yara Scanner</Text>
-                <Text className=" text-md font-light h-full mt-1 ml-11">check your CID for malicious content</Text>
+              <Box className="hidden sm:flex flex-row sm:ml-6 text-snow align-middle justify-center mt-4">
+                <Text className=" text-2xl font-bold h-full">IPFS Recon</Text>
+                <Text className=" text-sm font-extralight h-full mt-1 ">naissance</Text>
+                <Text className=" text-md font-light h-full mt-1 align-end  ml-[20vw]">check your CID for malicious content</Text>
               </Box>
               <Box className="hidden sm:block sm:ml-6"></Box>
             </Box>

@@ -37,7 +37,7 @@ export default function IpfsInput() {
 
   return (
     <>
-      <Box className="mx-3 -mt-3 sticky top-28 z-10">
+      <Box className="mx-3 -mt-3 sticky top-28 z-40">
         <DopeAlter headText={'Paste your IPFS CID:'} color={'aqua'} show={!store.cid} />
         <div>
           <InputGroup

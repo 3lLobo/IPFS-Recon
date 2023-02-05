@@ -31,7 +31,7 @@ export const IpfsCard = ({ ls, idx }) => {
 
   function onCardClick() {
     if (store.selectedIdx.includes(idx)) {
-      dispatch(unselectFile({ idx }))
+      // dispatch(unselectFile({ idx }))
     } else {
       // Trigger the download of the clicked file
       trigger({ cid: ls.cid }, true)

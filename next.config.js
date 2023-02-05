@@ -11,6 +11,11 @@ const nextConfig = {
             key: 'x-apikey',
             value: process.env.VT_APIKEY,
           },
+          {
+            type: 'header',
+            key: 'host',
+            value: 'www.virustotal.com',
+          }
         ],
         destination: 'https://www.virustotal.com/:path*', // Proxy to the Hive
       },

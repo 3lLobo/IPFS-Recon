@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import md5 from 'md5'
 
 // remove idx from array
 function arrRemoveByElement(arr, value) {
@@ -20,6 +21,8 @@ const initialState = {
   selectedIdx: new Array(),
   selectedFiles: new Array(),
   selectedName: new Array(),
+  selectedMd5: new Array(),
+  reports: new Array(),
   deployed: false,
 }
 
@@ -38,6 +41,8 @@ export const ipfsReduxSlice = createSlice({
         state.selectedIdx.push(idx)
         state.selectedFiles.push(file)
         state.selectedName.push(name)
+        const filehash = md5(file)
+        state.selectedMd5.push(filehash)
       }
     },
     unselectFile: (state, action) => {
@@ -47,9 +52,22 @@ export const ipfsReduxSlice = createSlice({
         const file_idx = state.selectedIdx.indexOf(idx)
         state.selectedFiles = arrRemoveByIdx(state.selectedFiles, file_idx)
         state.selectedName = arrRemoveByIdx(state.selectedName, file_idx)
+        state.selectedMd5 = arrRemoveByIdx(state.slectedMd5, file_idx)
         state.selectedIdx = arrRemoveByElement(state.selectedIdx, idx)
         console.log('Removed file: ', idx)
       }
+    },
+    addReport: (state, action) => {
+      const { data, idx } = action.payload
+      const fileName = state.selectedName[state.selectedIdx.indexOf(idx)]
+      const report = {
+        data: data,
+        fileName: fileName,
+        idx: idx,
+      }
+      state.reports.push(report)
+
+      console.log('Added report: ', report)
     },
     deployFile: (state) => {
       // Deploy the file to CORTX
@@ -61,6 +79,6 @@ export const ipfsReduxSlice = createSlice({
   },
 })
 
-export const { setCid, selectFile, unselectFile, deployFile, reset } = ipfsReduxSlice.actions
+export const { setCid, selectFile, unselectFile, deployFile, addReport, reset } = ipfsReduxSlice.actions
 
 export default ipfsReduxSlice.reducer

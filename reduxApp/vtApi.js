@@ -2,13 +2,15 @@
 
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react'
 import axios from 'axios'
+// import sdkApi from 'api'
 
+// const sdk = sdkApi('@virus-total/vt3.0')
 
 const axiosBaseQuery =
   (
     { baseUrl }
   ) =>
-    async ({ url, method, data, params }) => {
+    async ({ url, method, data, params, headers }) => {
       try {
         const result = await axios({
           url: baseUrl + url,
@@ -19,6 +21,7 @@ const axiosBaseQuery =
           },
           headers: {
             'x-apikey': 'xxx',
+            ...headers,
           },
         })
         return { data: result.data }
@@ -45,6 +48,9 @@ export const vtApi = createApi({
       query: ({ hash }) => ({
         url: `/files/${hash}`,
         method: 'GET',
+        headers: {
+          'accept': 'application/json',
+        },
       }),
     }),
     checkFile: builder.mutation({
@@ -52,7 +58,7 @@ export const vtApi = createApi({
       query: ({ file }) => ({
         url: `/files`,
         method: 'POST',
-        data: file,
+        data: { file },
       }),
     })
   }),
