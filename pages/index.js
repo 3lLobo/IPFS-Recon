@@ -1,18 +1,18 @@
 // import IpfsComponent from "../components/Ipfs/ipfs";
 
 import HomeWrapper from '../components/layout'
-import { useEffect, useState } from 'react'
 import { IpfsBox } from '../components/Ipfs/IpfsBox'
-import { S3Box } from '../components/Aws/S3box'
-// import { S3React } from '../components/Aws/S3React'
 import IpfsInput from '../components/Ipfs/IpfsInput'
 import IpfsLs from '../components/Ipfs/IpfsLs'
 
 import { useSelector, useDispatch } from 'react-redux'
 import useMyToast from '../hooks/useMyToast'
-import { createS3, listBucket } from '../lib/s3Util'
-import { CortxBuckets } from '../components/Aws/CortxBuckets'
 import { BezierSpinner } from '../components/Spinner/BezierSpinner'
+import { IpfsCard } from '../components/Ipfs/IpfsCard'
+import { Text } from '@chakra-ui/layout'
+import { v4 } from 'uuid'
+import { Button } from '@chakra-ui/button'
+import { DopeAlter } from '../components/Alert/dopeAlert'
 
 export default function Home({ buckets }) {
   const store = useSelector((state) => state.ipfsRedux)
@@ -32,11 +32,36 @@ export default function Home({ buckets }) {
         </div>
       )}
       <HomeWrapper>
-        <div className="relative sm:flex space-x-11 ">
-          <IpfsBox>
+        <div className="grid grid-flow-col grid-cols-5 w-full gap-11">
+          <div
+            className='py-3 flex flex-col flex-nowrap sm:py-11 text-sm w-full col-span-2 overflow-auto'
+          >
+            {/* <IpfsBox> */}
             <IpfsInput />
-            {store.cid && <IpfsLs />}
-          </IpfsBox>
+            <IpfsLs />
+            {/* </IpfsBox> */}
+          </div>
+          <div className="col-span-3  w-full flex flex-col justify-center items-center mt-11 overflow-auto">
+            <DopeAlter headText="Reports" bodyText="Your reports for the Scanned files" show={store.selectedIdx.length > 0} color="aqua" />
+            <div className="flex flex-col justify-center items-center h-full  w-full gap-6 ">
+              {store.selectedIdx.length > 0 && (
+                store.selectedIdx.map((idx) => {
+                  return (
+                    <Button
+                      key={v4()}
+                      className="w-1/2 h-1/2"
+                      onClick={() => {
+                        console.log('🚀 ~ file: index.js ~ line 81 ~ store.selectedIdx.map ~ idx', idx)
+                      }}
+                    >
+                      Open Report
+                    </Button>
+                  )
+                })
+              )}
+            </div>
+          </div>
+
           {/* <S3Box>
             <CortxBuckets />
           </S3Box> */}
