@@ -15,42 +15,71 @@ import { IoSettings } from 'react-icons/io5'
 import { v4 as uuid } from 'uuid'
 import { IpfsCard } from './IpfsCard'
 import { BezierSpinner } from '../Spinner/BezierSpinner'
-import { resetFile } from '../../reduxApp/ipfsSlice'
+import { reset } from '../../reduxApp/ipfsReduxSlice'
+import { DopeAlter } from '../Alert/dopeAlert'
+import { motion, AnimatePresence } from 'framer-motion'
+import { skipToken } from '@reduxjs/toolkit/dist/query'
+import { DemoIpfsCard } from './IpfsCardDemo'
 
 export default function IpfsLs() {
   const store = useSelector((state) => state.ipfsRedux)
   const dispatch = useDispatch()
   const toast = useMyToast()
-  const { data, error, isLoading, isError } = useLsCidQuery({ cid: store.cid })
+  const { currentData, data, error, isLoading, isError } = useLsCidQuery({ cid: store.cid ? store.cid : skipToken })
 
   useEffect(() => {
-    if (isError) {
+    if (store.cid && isError) {
       toast('error', 'No files found related to this CID 💔', 'ipfsCidError')
       console.log('🚀 ~ file: IpfsLs.js ~ line 11 ~ IpfsLs ~ error', error)
-      dispatch(resetFile())
+      dispatch(reset())
     }
-  }, [isError, dispatch, toast, error])
+    console.log(store.cid)
+  }, [isError, dispatch, toast, error, store.cid])
 
   return (
-    <Box className="">
+    <Box className="absolute -top-9 flex flex-col w-full max-w-[30vw] overflow-y-clip">
       {isLoading ? (
         <BezierSpinner></BezierSpinner>
       ) : (
-        !isError && (
-          <Box className="relative flex flex-col">
-            <div className={store.selectedIdx.length != 0 ? 'opacity-0' : ''}>
-              <p className="min-w-fit mr-3 align-text-bottom my-1 font-semibold text-center">
-                Select files to upload:
-              </p>
-            </div>
-            <div className="flex sm:flex-col overflow-x-scroll scrollbar-hide z-20">
-              {data.map((file, i) => {
-                return <IpfsCard ls={file} idx={i} key={uuid()} />
-              })}
-            </div>
-          </Box>
-        )
-      )}
-    </Box>
+        <AnimatePresence>
+          <motion.div
+            initial={false}
+            animate={(currentData && store.cid) ? 'visible' : 'hidden'}
+            exit={{ opacity: 0 }}
+            transition={{ ease: "easeInOut", duration: .5 }}
+            variants={{
+              visible: { opacity: 1, y: 0 },
+              hidden: { opacity: 0, y: 500 },
+            }}
+          >
+            <Box className="flex flex-col w-full ">
+              <div className="sticky top-52 mt-0">
+                <DopeAlter
+                  headText="Scan Data"
+                  bodyText="Select files to scan."
+                  color="aqua"
+                  show={store.selectedIdx.length === 0 && store.cid}
+                />
+              </div>
+              <div
+                className="flex  sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10 max-w-[40vw]  max-h-[93vh] pt-60 pb-11"
+              >{data &&
+                <>
+                  {data?.map((file, i) => {
+                    {/* {[...data, ...data, ...data].map((file, i) => { */ }
+                    return (
+                      <IpfsCard ls={file} idx={i} key={uuid()} />
+                    )
+                  })}
+                  <DemoIpfsCard md5Hash="193ef846f77e3c0770dd4db567258cde" />
+                </>
+                }
+              </div>
+            </Box>
+          </motion.div>
+        </AnimatePresence>
+      )
+      }
+    </Box >
   )
 }

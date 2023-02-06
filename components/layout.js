@@ -11,18 +11,15 @@ export default function HomeWrapper({ children }) {
 
   return (
     <div
-      className={`h-screen flex flex-col justify-between bg-fixed overflow-scroll scroll-smooth ${store.mode} ${bg}`}
+      className={`h-screen flex flex-col justify-between bg-fixed ${store.mode} ${bg}`}
     >
       <Head />
       <Header />
-      <main className="z-10 mb-auto">{children}</main>
-      <footer
-        className="sticky bottom-0 mb-0 mt-auto w-full z-50 text-left bg-gray-900 text-white text-xs flex pt-1"
-        style={{ 'background-color': 'rgba(0, 0, 0, 0.3)' }}
-      >
+      <main className="z-10 mb-auto sm:mx-20 overflow-auto scrollbar-hide">{children}</main>
+      <footer className="sticky bottom-0 mb-0 mt-auto w-full text-left bg-gray-900 text-white text-xs flex pt-1 bg-slate-900 bg-opacity-60 z-10">
         <IpfsComponent />
         <div className="ml-auto text-center mx-3 flex">
-          <a className="mt-3">© 2022 planetary Copyright:</a>
+          <a className="mt-3">© 2023 planetary Copyright:</a>
           <a
             href="https://github.com/3lLobo"
             type="button"

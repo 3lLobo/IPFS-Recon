@@ -11,8 +11,12 @@ import {
 } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import useMyToast from '../../hooks/useMyToast'
-import { reset, setCid } from '../../reduxApp/ipfsSlice'
+import { reset, setCid } from '../../reduxApp/ipfsReduxSlice'
 import isIpfs from 'is-ipfs'
+import { DopeAlter } from '../Alert/dopeAlert'
+import { motion, AnimatePresence } from 'framer-motion'
+
+
 
 export default function IpfsInput() {
   const store = useSelector((state) => state.ipfsRedux)
@@ -22,8 +26,9 @@ export default function IpfsInput() {
   function handleInput(event) {
     event.preventDefault()
     const currentCid = event.target.value
-    if (isIpfs.cid(currentCid)) {
-      // const currentCid = 'QmQ2r6iMNpky5f1m4cnm3Yqw8VSvjuKpTcK1X7dBR1LkJF'
+    if (true) {
+      // if (isIpfs.cid(currentCid)) {
+      // const currentCid = 'QmcSn5SSDLNZZQGggKtnTquw2j7Smn971t5e2dyERAtuLX'
       dispatch(setCid({ cid: currentCid }))
     } else {
       dispatch(reset())
@@ -32,31 +37,27 @@ export default function IpfsInput() {
 
   return (
     <>
-      <Box className="m-3 sticky top-28 z-40">
-        {!store.cid && (
-          <div className="min-w-fit mr-3 align-text-bottom mb-3 font-semibold">
-            Paste your IPFS CID:
-          </div>
-        )}
+      <Box className="mx-3 -mt-3 absolute top-28 z-40 w-full max-w-[30rem]">
+        <DopeAlter headText={'Paste your IPFS CID:'} color={'aqua'} show={!store.cid} />
         <div>
           <InputGroup
             h="7"
-          // className=' fill-charcoal bg-opacity-50'
           >
             <InputLeftElement
               h="7"
-            // className='opacity-100'
             >
               <Image alt="ipfsSmallBox" src="/ipfs-logo.svg" h={41} />
             </InputLeftElement>
             <Input
               h="7"
               rounded="xl"
-              fontWeight="black"
-              onChange={handleInput}
+              // fontWeight="black"
+              onChange={(e) => handleInput(e)}
               placeholder={store.cid || '<myCID>'}
               size="xs"
               variant="outline"
+              value={store.cid}
+            // value='QmcSn5SSDLNZZQGggKtnTquw2j7Smn971t5e2dyERAtuLX'
             ></Input>
           </InputGroup>
         </div>

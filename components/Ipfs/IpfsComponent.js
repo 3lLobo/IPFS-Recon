@@ -1,7 +1,7 @@
 // This components requires a local IPFS node running on port 5001.
 import { useState, useEffect } from 'react'
 import { create } from 'ipfs-http-client'
-import { create as create4Browser, } from 'ipfs-core'
+import { create as create4Browser } from 'ipfs-core'
 import { Box, Button, Input, InputGroup, InputLeftElement, Table, Text } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 // import { setIpfsDaemon } from '../../reduxApp/ipfsSlice'
@@ -39,8 +39,7 @@ export function IpfsComponent() {
       if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
         console.log('Running on localhost!')
         node = await create({
-          // url: '/ip4/127.0.0.1/tcp/5001',
-          url: 'http://127.0.0.1:5001',
+          url: 'http://localhost:5001/api/v0',
           // url: 'http://127.0.0.1:45005/api/v0',
         })
       } else {
@@ -51,15 +50,13 @@ export function IpfsComponent() {
         }
       }
       if (node) {
-        // console.log('IPFS node', node)
-        const nodeId = await node.id()
-        console.log('IPFS node ID', nodeId)
-        const nodeVersion = await node.version()
-        const nodeIsOnline = await node.isOnline()
+        const nodeId = await node?.id()
+        const nodeVersion = await node?.version()
+        const nodeIsOnline = await node?.isOnline()
 
         setIpfs(node)
-        setId(nodeId.publicKey)
-        setVersion(nodeVersion.version)
+        setId(nodeId?.id?.string)
+        setVersion(nodeVersion?.version)
         setIsOnline(nodeIsOnline)
 
         // dispatch(setIpfsDaemon({ node, toast }))

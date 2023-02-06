@@ -16,37 +16,41 @@ import { v4 as uuid } from 'uuid'
 import { BezierSpinner } from '../Spinner/BezierSpinner'
 import { selectFile, unselectFile } from '../../reduxApp/ipfsReduxSlice'
 import prettyBytes from 'pretty-bytes'
-import ScanButton from './ScanButton'
+import DemoScanButton from './ScanButtonDemo'
 
-export const IpfsCard = ({ ls, idx }) => {
+
+const maliciousFile = {
+  name: 'metaAaSpLoiT.exe',
+  size: '11.3 kB',
+  type: 'application/x-msdownload',
+}
+
+export const DemoIpfsCard = ({ md5Hash }) => {
 
   const store = useSelector((state) => state.ipfsRedux)
   const dispatch = useDispatch()
   const toast = useMyToast()
   const [trigger, result, lastPromiseInfo] = useLazyGetCidQuery()
-  const isSelect = store.selectedIdx.includes(idx)
+  const [isSelect, setIsSelect] = useState(false)
 
   const attrs = ['name', 'size', 'type']
   const bg = useColorModeValue('bg-snow-muted', 'ring-1 ring-slate-900 bg-aqua-muted ')
 
   function onCardClick() {
-    if (store.selectedIdx.includes(idx)) {
-      // dispatch(unselectFile({ idx }))
-    } else {
-      // Trigger the download of the clicked file
-      trigger({ cid: ls.cid }, true)
-    }
+
+    setIsSelect(true)
+
   }
 
-  useEffect(() => {
-    if (result.isSuccess) {
-      const name = ls['name'] || 'ukwn' + uuid().toString()
-      dispatch(selectFile({ idx, file: result.data, name }))
-    } else if (result.isError) {
-      console.log('🚀 ~ file: IpfsCard.js ~ line 43 ~ useEffect ~ result.isError', result.isError)
-      toast('error', 'Failed to download file 😥', 'IpfsDownError')
-    }
-  }, [result, dispatch, ls, toast, idx])
+  // useEffect(() => {
+  //   if (result.isSuccess) {
+  //     const name = ls['name'] || 'ukwn' + uuid().toString()
+  //     // dispatch(selectFile({ idx, file: result.data, name }))
+  //   } else if (result.isError) {
+  //     console.log('🚀 ~ file: IpfsCard.js ~ line 43 ~ useEffect ~ result.isError', result.isError)
+  //     toast('error', 'Failed to download file 😥', 'IpfsDownError')
+  //   }
+  // }, [result, dispatch, toast,])
 
   const hoverStyle = isSelect
     ? ' bg-opacity-20'
@@ -54,14 +58,14 @@ export const IpfsCard = ({ ls, idx }) => {
 
   const hiddenStyle = result.isLoading ? ' opacity-20' : ''
   const dimStyle = isSelect ? ' opacity-10' : ''
-  const fileSize = ls['size'] ? prettyBytes(ls['size']) : 'unknown'
+  // const fileSize = ls['size'] ? prettyBytes(ls['size']) : 'unknown'
 
   return (
     <Box
       className={`${bg} flex flex-col w-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       onClick={onCardClick}
     >
-      <ScanButton idx={idx} showButton={isSelect} />
+      <DemoScanButton md5Hash={md5Hash} showButton={isSelect} />
       {result.isLoading && (
         <div className="fixed z-40 justify-center ml-11">
           <BezierSpinner
@@ -85,8 +89,8 @@ export const IpfsCard = ({ ls, idx }) => {
         <List className="w-full h-full col-span-1">
           {attrs.map((attr, i) => {
             return (
-              <ListItem key={uuid()} title={ls[attr]?.length > 11 ? ls[attr] : null} className="truncate">
-                {(attr === 'size' ? fileSize : ls[attr]) || 'unknown'}
+              <ListItem key={uuid()} className="truncate">
+                {(maliciousFile[attr]) || 'unknown'}
               </ListItem>
             )
           })}
