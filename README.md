@@ -1,18 +1,37 @@
-### Cortx IPFS Bridge
+### IPFS Recon
 
-This web(3) app provides a bridge between IPFS with it's incentive-layer blockchain FileCoin and the massive-data storage system CORTX.
+## TLDR
+
+> IPFS Recon offers OSINT reconnaissance on any file on IPFS for malware.
+
+## Description
+
+Ever wondered if the file you are about to download is safe? 
+IPFS Recon let's you inspect any file on IPFS for viruses and malware.
+
+Web3 is a young and fast moving space and suffers from hacks and exploits.
+While IPFS is a genius innovation, attackers are already using it to distribute malware.
+This pilot project demonstrates how files shared on IPFS can be inspected before downloading them.
+
+Future work could include doing this on-chain by integrating security scans in the FileCoin Virtual Machine.
+
+## Reconnaissance
+
+It hashes the file and checks it against a list of OSINT (Open Source Intelligence) sources.
+A report is generated with the results and warn the user if the file is malicious.
+
+If the hash has not been sighted yet, the user can upload the file to [VirusTotal](https://www.virustotal.com/gui/) to scan it for viruses and get a report in return.
+
+All this from the browser without downloading the file to your computer.
 
 Main Features:
 
 - Inspect CID content if available ✅
-- fetch data from IPFS through it's CID ✅
-- deploy to CORTX file-system using S3 interface 📦
-- List deployed files from CORTX file-system 📦
-- authenticate using FileCoin 📦
-- assign user-specific bucket 📦
-- invert bridge 📦
+- fetch the data into memory from IPFS through it's CID ✅
+- Scan the file for viruses ✅
+- Generate a report based on gethered OSINT ✅
 
-[Live Demo](https://cortxportal.netlify.app/)
+[Live Demo](https://ipfs-recon.vercel.app/)
 
 ## Get Started 🚀
 
@@ -22,11 +41,21 @@ Spin up an IPFS deamon:
 ipfs daemon
 ```
 
-Make sure your CORTX cluster is running and available. In case of [cloudshare](https://use.cloudshare.com/Authenticated/Landing.aspx?s=1), log in to your account.
+> Add your VirusTotal API key to the `.env` file:
+
+Build and launch the app:
+
+```bash
+yarn 
+yarn build
+yarn start
+```
+
+Enter any CID and select the nested files you wish to inspect.
+
 
 ## Resources
 
-[AWS for React](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/getting-started-react-native.html)
 
 ### Color palette
 
@@ -54,21 +83,3 @@ Switching this to `local` will make it connectable.
 
 [IPFS hooks](https://github.com/ipfs-examples/js-ipfs-examples/blob/master/examples/browser-create-react-app/src/App.js)
 
-## AWS S3
-
-- bucket names must be lowercase.
-- CORS can be upadted with Callback
-- CORS policy should look like [this](https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/ManageCorsUsing.html)
-
-**Update:**
-
-CORSpolicy only concerns the incoming requests. There is no obvious way to have the bucket sign the the response with the incoming origin.
-That leaves us with the only option to go ServerSide, which also holds the benefit that it doesn't disclose the env variables to the browser.
-
-Instead of messing with CORS policy, we now try `getServerSideProps()` and as plan B set up a proxy-server API.
-
-We got thisss, 16h to go.
-
-THISSS: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example_s3_PutBucketCors_section.html
-
-[This dude](https://www.youtube.com/watch?v=hxyp_LkKDdk) uses an VPN to get a signed header.

@@ -53,7 +53,7 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
           className="bg-aqua-muted dark:bg-indigo-400 flex flex-col w-full max-h-[80vh] justify-center items-center align-middle prose"
         >
           <div
-            className="flex flex-col justify-between  text-slate-900 dark:text-snow rounded-2xl w-[74vw] max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20"
+            className="flex flex-col justify-between  text-slate-900 dark:text-snow rounded-2xl w-[74vw] max-w-6xl max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20"
           >
             <ModalHeader>
               <div
@@ -86,8 +86,11 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
             <ModalBody
               className="flex flex-col justify-start align-middle gap-y-6  text-charcoal dark:text-snow dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
             >
-              <HiveReport content={report.data} />
-
+              <div
+                className="relative mt-6"
+              >
+                <HiveReport content={report.data} />
+              </div>
               {/* <div
               className="flex flex-col justify-evenly gap-y-6  text-charcoal dark:text-snow font-mono rounded-2xl  p-2"
             >
