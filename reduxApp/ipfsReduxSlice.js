@@ -59,6 +59,14 @@ export const ipfsReduxSlice = createSlice({
     },
     addReport: (state, action) => {
       const { data, idx } = action.payload
+      if (state.reports.length > 0) {
+        const report_idx = state.reports.findIndex((report) => report.idx === idx)
+        if (report_idx > -1) {
+          state.reports[report_idx].data = data
+          console.log('Updated report: ', state.reports[report_idx])
+          return
+        }
+      }
       const fileName = state.selectedName[state.selectedIdx.indexOf(idx)]
       const report = {
         data: data,

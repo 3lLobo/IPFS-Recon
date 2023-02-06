@@ -14,6 +14,7 @@ import { v4 } from 'uuid'
 import { Button } from '@chakra-ui/button'
 import { DopeAlter } from '../components/Alert/dopeAlert'
 import { Montserrat, Montserrat_Alternates, Poppins } from '@next/font/google'
+import VtComponent from '../components/Vt/VtComponent'
 
 
 const montserrat = Montserrat({
@@ -50,24 +51,7 @@ export default function Home({ buckets }) {
             {/* </IpfsBox> */}
           </div>
           <div className="col-span-3  w-full flex flex-col justify-center items-center mt-11 overflow-auto">
-            <DopeAlter headText="Reports" bodyText="Your reports for the Scanned files" show={store.selectedIdx.length > 0} color="aqua" />
-            <div className="flex flex-col justify-center items-center h-full  w-full gap-6 ">
-              {store.selectedIdx.length > 0 && (
-                store.selectedIdx.map((idx) => {
-                  return (
-                    <Button
-                      key={v4()}
-                      className="w-1/2 h-1/2"
-                      onClick={() => {
-                        console.log('🚀 ~ file: index.js ~ line 81 ~ store.selectedIdx.map ~ idx', idx)
-                      }}
-                    >
-                      Open Report
-                    </Button>
-                  )
-                })
-              )}
-            </div>
+            <VtComponent />
           </div>
 
           {/* <S3Box>

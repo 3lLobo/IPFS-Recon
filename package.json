@@ -27,6 +27,7 @@
     "ipfs-http-client": "^57.0.1",
     "is-ipfs": "^6.0.2",
     "it-all": "^1.0.6",
+    "json-beautify": "^1.1.1",
     "logrocket": "^3.0.1",
     "logrocket-react": "^5.0.1",
     "md5": "^2.3.0",
@@ -35,7 +36,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-json-tree": "^0.18.0",
     "react-redux": "^8.0.2",
+    "react-timeago": "^7.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
