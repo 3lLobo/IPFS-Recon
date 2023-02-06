@@ -3,6 +3,7 @@ import { List, ListItem } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import ReactTimeago from 'react-timeago';
+import ProgressCircle from './ProgressCircle';
 
 
 export const HiveReport = ({ content }) => {
@@ -59,9 +60,12 @@ export const HiveReport = ({ content }) => {
     <div
     // className='flex flex-col justify-center items-center overflow-x-scroll w-full '
     >
+      {stats &&
+        <ProgressCircle stats={stats} total={total} others={others} />
+      }
       <div className="panel panel-info">
-        <div className="flex justify-center text-xl font-bold text-snow">
-          <h2>VirusTotal Report</h2>
+        <div className="flex justify-center text-xl font-bold text-charcoal dark:text-snow">
+          <h2>VirusTotal Summary</h2>
         </div>
         <div className="panel-body">
           <div className="grid grid-flow-row ">
@@ -120,8 +124,8 @@ export const HiveReport = ({ content }) => {
                 >
 
                   {content.attributes.names.map(name => (
-                    <ListItem key={name + 'HiveReport'} className="col-span-1 truncate w-28 text-center " title={name}
-                    >{name}</ListItem>
+                    <li key={name + 'HiveReport'} className="col-span-1 truncate w-28 text-center text-snow" title={name}
+                    >{name}</li>
                   ))}
                 </List>
               </dl>
@@ -131,7 +135,7 @@ export const HiveReport = ({ content }) => {
                   <p className="font-semibold">{content.attributes.url}</p>
                 </dl>}
               {(content.id && content.type != 'domain' && content.type != 'fqdn') &&
-                <dl className="flex flex-row justify-center gap-4 divide-x-4">
+                <dl className="flex flex-row justify-center gap-4 divide-x-4 text-snow bg-slate-600/50 rounded-full py-1">
                   <span>SHA-256</span>
                   <span className="pl-3 font-mono">{content.id}</span>
                 </dl>}

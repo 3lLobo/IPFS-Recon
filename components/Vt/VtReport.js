@@ -30,14 +30,14 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
         className={`${bg} flex flex-col w-full h-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       >
         <div className="flex flex-col justify-between px-3 py-6">
-          {/* <Text className="font-extralight">
+          {/* <Text className="font-semibold">
             Report for:
           </Text> */}
           <div
             className="flex flex-row justify-evenly"
           >
             <Icon as={IoAnalytics} className="text-2xl fill-aqua" />
-            <Text className="font-extralight text-sm" >
+            <Text className="font-semibold text-sm" >
               {name}
             </Text>
           </div>
@@ -53,48 +53,48 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
           className="bg-aqua-muted dark:bg-indigo-400 flex flex-col w-full max-h-[80vh] justify-center items-center align-middle prose"
         >
           <div
-            className="flex flex-col justify-between text-snow rounded-2xl w-[74vw] max-h-[80vh] bg-right-top bg-gradient-to-t from-aqua/90 to-aqua/20"
+            className="flex flex-col justify-between  text-slate-900 dark:text-snow rounded-2xl w-[74vw] max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20"
           >
             <ModalHeader>
               <div
                 className="flex flex-row justify-center items-center gap-x-4"
               >
-                <Text className="font-extralight text-3xl">
+                <Text className="font-semibold text-2xl">
                   Report for:
                 </Text>
                 <div className="flex flex-col justify-center items-center">
-                  <Text className="font-extralight text-sm">
+                  <div className="font-semibold text-sm">
                     Filename:
-                    <span className="text-snow dark:text-charcoal ml-3">
+                    <span className="  dark:text-snow ml-3">
                       {name}
                     </span>
-                  </Text>
+                  </div>
                   {fileCid && (
-                    <Text className="font-extralight text-sm">
+                    <div className="font-semibold text-sm">
                       CID:
                       <Link href={`https://ipfs.io/ipfs/${fileCid}`}>
-                        <span className="text-snow dark:text-charcoal ml-3">
+                        <span className=" text-charcoal dark:text-snow  ml-3">
                           {fileCid}
                         </span>
                       </Link>
-                    </Text>
+                    </div>
                   )}
                 </div>
               </div>
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody
-              className="flex flex-col justify-start align-middle gap-y-6 text-snow dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
+              className="flex flex-col justify-start align-middle gap-y-6  text-charcoal dark:text-snow dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
             >
               <HiveReport content={report.data} />
 
               {/* <div
-              className="flex flex-col justify-evenly gap-y-6 text-snow font-mono rounded-2xl  p-2"
+              className="flex flex-col justify-evenly gap-y-6  text-charcoal dark:text-snow font-mono rounded-2xl  p-2"
             >
               <div className="flex flex-row justify-start items-center gap-4">
                 <Icon as={IoTime} className="text-2xl fill-aqua" />
                 <div
-                  className="flex flex-row text-sm font-extralight font-sans w-full justify-start gap-x-6"
+                  className="flex flex-row text-sm font-semibold font-sans w-full justify-start gap-x-6"
                 >
                   <div>
                     First seen:
@@ -108,7 +108,7 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
 
             <ModalFooter>
               <div
-                className="flex flex-row justify-between text-snow rounded-2xl bg-aqua/10 p-2 w-full h-full"
+                className="flex flex-row justify-between  text-charcoal dark:text-snow rounded-2xl bg-aqua/10 p-2 w-full h-full"
               >
                 <Link href={`https://www.virustotal.com/gui/search/${report.data.attributes.md5}`}>
                   <Button variant="outline">

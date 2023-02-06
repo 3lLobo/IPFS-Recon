@@ -16,7 +16,7 @@ export default function VtComponent() {
       <div
         className="grid grid-flow-row grid-cols-1 justify-center items-center gap-y-3 "
       >
-        <VtReport key={111} name="test" idc={111} report={demoReport} fileCid="123123123" />
+        {/* <VtReport key={111} name="test" idc={111} report={demoReport} fileCid="123123123" /> */}
         {store.reports.map((report) => {
           const { idx, fileName, data } = report
           return (

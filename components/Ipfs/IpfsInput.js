@@ -28,7 +28,7 @@ export default function IpfsInput() {
     const currentCid = event.target.value
     if (true) {
       // if (isIpfs.cid(currentCid)) {
-      const currentCid = 'QmcSn5SSDLNZZQGggKtnTquw2j7Smn971t5e2dyERAtuLX'
+      // const currentCid = 'QmcSn5SSDLNZZQGggKtnTquw2j7Smn971t5e2dyERAtuLX'
       dispatch(setCid({ cid: currentCid }))
     } else {
       dispatch(reset())
@@ -56,6 +56,7 @@ export default function IpfsInput() {
               placeholder={store.cid || '<myCID>'}
               size="xs"
               variant="outline"
+              value={store.cid}
             // value='QmcSn5SSDLNZZQGggKtnTquw2j7Smn971t5e2dyERAtuLX'
             ></Input>
           </InputGroup>
