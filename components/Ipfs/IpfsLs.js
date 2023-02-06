@@ -19,6 +19,7 @@ import { reset } from '../../reduxApp/ipfsReduxSlice'
 import { DopeAlter } from '../Alert/dopeAlert'
 import { motion, AnimatePresence } from 'framer-motion'
 import { skipToken } from '@reduxjs/toolkit/dist/query'
+import { DemoIpfsCard } from './IpfsCardDemo'
 
 export default function IpfsLs() {
   const store = useSelector((state) => state.ipfsRedux)
@@ -36,7 +37,7 @@ export default function IpfsLs() {
   }, [isError, dispatch, toast, error, store.cid])
 
   return (
-    <Box className="absolute -top-9 flex flex-col w-full max-w-[45vw] overflow-y-clip">
+    <Box className="absolute -top-9 flex flex-col w-full max-w-[30vw] overflow-y-clip">
       {isLoading ? (
         <BezierSpinner></BezierSpinner>
       ) : (
@@ -61,14 +62,18 @@ export default function IpfsLs() {
                 />
               </div>
               <div
-                className="flex  sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10 max-w-[40vw]  max-h-[95vh]  pt-60"
-              >
-                {data?.map((file, i) => {
-                  // {[...data, ...data, ...data].map((file, i) => {
-                  return (
-                    <IpfsCard ls={file} idx={i} key={uuid()} />
-                  )
-                })}
+                className="flex  sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10 max-w-[40vw]  max-h-[93vh] pt-60 pb-11"
+              >{data &&
+                <>
+                  {data?.map((file, i) => {
+                    {/* {[...data, ...data, ...data].map((file, i) => { */ }
+                    return (
+                      <IpfsCard ls={file} idx={i} key={uuid()} />
+                    )
+                  })}
+                  <DemoIpfsCard md5Hash="193ef846f77e3c0770dd4db567258cde" />
+                </>
+                }
               </div>
             </Box>
           </motion.div>

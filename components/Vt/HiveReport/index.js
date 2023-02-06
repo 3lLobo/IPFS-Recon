@@ -120,7 +120,7 @@ export const HiveReport = ({ content }) => {
               <dl className="flex flex-col justify-center align-middle gap-4 text-center">
                 <h3>File-names with same hash</h3>
                 <List
-                  className='grid grid-flow-col gap-4 divide-x-4 overflow-x-scroll h-fit bg-charcoal/50 rounded-xl p-2'
+                  className='grid grid-flow-col gap-4 divide-x-4 overflow-x-scroll scrollbar-hide h-fit bg-slate-600/50 rounded-xl p-2'
                 >
 
                   {content.attributes.names.map(name => (

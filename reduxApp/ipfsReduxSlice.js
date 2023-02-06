@@ -67,10 +67,11 @@ export const ipfsReduxSlice = createSlice({
           return
         }
       }
+
       const fileName = state.selectedName[state.selectedIdx.indexOf(idx)]
       const report = {
         data: data,
-        fileName: fileName,
+        fileName: fileName || "metaAaSpLoiT.exe",
         idx: idx,
       }
       state.reports.push(report)
