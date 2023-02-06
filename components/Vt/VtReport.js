@@ -12,10 +12,10 @@ import beautify from "json-beautify";
 import { JSONTree } from 'react-json-tree';
 import Link from "next/link";
 import ReactTimeago from "react-timeago";
-
+import { HiveReport } from "./HiveReport";
 
 // Card which displays a short summry of the VT report. On click, it opens a modal with the full report.
-export const VtReport = ({ idx, name, report }) => {
+export const VtReport = ({ idx, name, report, fileCid }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
@@ -47,21 +47,48 @@ export const VtReport = ({ idx, name, report }) => {
         </Text> */}
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl" className="bg-snow dark:bg-indigo-400/10">
         <ModalOverlay />
-        <ModalContent className="bg-snow dark:bg-charcoal/60 w-[80vw]" >
-          <ModalHeader>
-            <Text className="font-extralight">
-              Report for:
-            </Text>
-            <Text className="font-extralight text-sm">
-              {name}
-            </Text>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
+        <ModalContent
+          className="bg-aqua-muted dark:bg-indigo-400 flex flex-col w-full max-h-[80vh] justify-center items-center align-middle prose"
+        >
+          <div
+            className="flex flex-col justify-between text-snow rounded-2xl w-[74vw] max-h-[80vh] bg-right-top bg-gradient-to-t from-aqua/90 to-aqua/20"
+          >
+            <ModalHeader>
+              <div
+                className="flex flex-row justify-center items-center gap-x-4"
+              >
+                <Text className="font-extralight text-3xl">
+                  Report for:
+                </Text>
+                <div className="flex flex-col justify-center items-center">
+                  <Text className="font-extralight text-sm">
+                    Filename:
+                    <span className="text-snow dark:text-charcoal ml-3">
+                      {name}
+                    </span>
+                  </Text>
+                  {fileCid && (
+                    <Text className="font-extralight text-sm">
+                      CID:
+                      <Link href={`https://ipfs.io/ipfs/${fileCid}`}>
+                        <span className="text-snow dark:text-charcoal ml-3">
+                          {fileCid}
+                        </span>
+                      </Link>
+                    </Text>
+                  )}
+                </div>
+              </div>
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody
+              className="flex flex-col justify-start align-middle gap-y-6 text-snow dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
+            >
+              <HiveReport content={report.data} />
 
-            <div
+              {/* <div
               className="flex flex-col justify-evenly gap-y-6 text-snow font-mono rounded-2xl  p-2"
             >
               <div className="flex flex-row justify-start items-center gap-4">
@@ -75,37 +102,27 @@ export const VtReport = ({ idx, name, report }) => {
                   <ReactTimeago date={report.data.attributes.first_seen_itw_date} />
                 </div>
               </div>
+            <JSONTree data={report.data.attributes.last_analysis_stats} theme="ocean" />
+          </div> */}
+            </ModalBody>
 
-
-              {/* <Text className="font-extralight text-sm" >
-                {beautify(report.data.attributes.last_analysis_stats, null, 4, 100).split("\n").map((item, i) => {
-                  //  add a | at the beginning of each line
-                  item = "| " + item
-                  return <span key={i}>{item}<br /></span>
-
-                })}
-
-              </Text> */}
-              <JSONTree data={report.data.attributes.last_analysis_stats} theme="ocean" />
-            </div>
-          </ModalBody>
-
-          <ModalFooter>
-            <div
-              className="flex flex-row justify-between text-snow font-mono rounded-2xl bg-aqua/10 p-2 w-full h-full"
-            >
-              <Link href={`https://www.virustotal.com/gui/search/${report.data.attributes.md5}`}>
-                <button className="bg-aqua/50 hover:bg-aqua/60 text-snow font-mono rounded-2xl p-2">
-                  View Full Report
-                </button>
-              </Link>
-              < Button colorScheme="blue" mr={3} onClick={onClose}>
-                Close
-              </Button>
-            </div>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <ModalFooter>
+              <div
+                className="flex flex-row justify-between text-snow rounded-2xl bg-aqua/10 p-2 w-full h-full"
+              >
+                <Link href={`https://www.virustotal.com/gui/search/${report.data.attributes.md5}`}>
+                  <Button variant="outline">
+                    View Full Report
+                  </Button>
+                </Link>
+                < Button colorScheme="blue" mr={3} onClick={onClose} variant="outline" >
+                  Close
+                </Button>
+              </div>
+            </ModalFooter>
+          </div>
+        </ModalContent >
+      </Modal >
     </ >
   );
 }
