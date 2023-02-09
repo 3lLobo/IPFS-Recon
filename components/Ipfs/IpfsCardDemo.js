@@ -21,7 +21,7 @@ import DemoScanButton from './ScanButtonDemo'
 
 const maliciousFile = {
   name: 'metaAaSpLoiT.exe',
-  size: '11.3 kB',
+  size: '[DEMO]',
   type: 'application/x-msdownload',
 }
 
@@ -54,7 +54,7 @@ export const DemoIpfsCard = ({ md5Hash }) => {
 
   const hoverStyle = isSelect
     ? ' bg-opacity-20'
-    : ' bg-opacity-10 hover:bg-opacity-20 hover:scale-90'
+    : ' bg-opacity-20 hover:bg-opacity-20 hover:scale-90'
 
   const hiddenStyle = result.isLoading ? ' opacity-20' : ''
   const dimStyle = isSelect ? ' opacity-10' : ''
@@ -62,14 +62,13 @@ export const DemoIpfsCard = ({ md5Hash }) => {
 
   return (
     <Box
-      className={`${bg} flex flex-col w-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+      className={`${bg}  bg-red-muted flex flex-col w-full min-w-[14rem] max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       onClick={onCardClick}
     >
       <DemoScanButton md5Hash={md5Hash} showButton={isSelect} />
       {result.isLoading && (
         <div className="fixed z-40 justify-center ml-11">
           <BezierSpinner
-          // text={"DOWNLOADING..."}
           />
         </div>
       )}

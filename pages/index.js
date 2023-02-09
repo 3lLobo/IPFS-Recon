@@ -41,44 +41,18 @@ export default function Home({ buckets }) {
         </div>
       )}
       <HomeWrapper>
-        <div className={"grid grid-flow-col grid-cols-5 w-full gap-3 " + montserrat.className}>
+        <div className={"grid sm:grid-flow-col sm:grid-cols-5 w-full gap-3" + montserrat.className}>
           <div
-            className='py-3 flex flex-col flex-nowrap sm:py-11 text-sm  col-span-2 overflow-auto'
+            className='py-3 flex flex-col flex-nowrap sm:py-11 text-sm sm:col-span-2 overflow-auto'
           >
-            {/* <IpfsBox> */}
             <IpfsInput />
             <IpfsLs />
-            {/* </IpfsBox> */}
           </div>
-          <div className="col-span-3  flex flex-col justify-center items-center mt-11 overflow-auto">
+          <div className="mt-[45vh] sm:col-span-3 flex flex-col justify-center items-center sm:mt-11 overflow-auto">
             <VtComponent />
           </div>
-
-          {/* <S3Box>
-            <CortxBuckets />
-          </S3Box> */}
         </div>
       </HomeWrapper>
     </>
   )
 }
-
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
-
-// export async function getServerSideProps({ req, res }) {
-//   // console.log("🚀 ~ file: index.js ~ line 35 ~ getServerSideProps ~ res", res)
-//   // console.log("🚀 ~ file: index.js ~ line 35 ~ getServerSideProps ~ req", req)
-
-//   const s3 = await createS3()
-//   // console.log("🚀 ~ file: index.js ~ line 39 ~ getServerSideProps ~ s3", s3)
-//   const buckets = await listBucket(s3)
-//   console.log("🚀 ~ file: index.js ~ line 40 ~ getServerSideProps ~ buckets", buckets)
-
-//   if (!buckets) {
-//     return {
-//       notFound: true,
-//     }
-//   }
-
-//   return { props: { buckets } }
-// }

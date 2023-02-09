@@ -19,7 +19,6 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
-  console.log("🚀report", beautify(report.data.attributes.last_analysis_stats, null, 2, 10));
 
   const bg = useColorModeValue('bg-snow-muted', 'ring-1 ring-slate-900 bg-aqua-muted ')
   const hoverStyle = ' bg-opacity-10 hover:bg-opacity-20 hover:scale-90'
@@ -27,12 +26,9 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
     <>
       <Box
         onClick={onOpen}
-        className={`${bg} flex flex-col w-full h-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+        className={`${bg} flex flex-col w-full h-full min-w-[11rem] max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       >
         <div className="flex flex-col justify-between px-3 py-6">
-          {/* <Text className="font-semibold">
-            Report for:
-          </Text> */}
           <div
             className="flex flex-row justify-evenly"
           >
@@ -42,18 +38,15 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
             </Text>
           </div>
         </div>
-        {/* <Text fontSize="xs" color="gray.500">
-          {VtReport}
-        </Text> */}
-      </Box>
 
+      </Box>
       <Modal isOpen={isOpen} onClose={onClose} size="6xl" className="bg-snow dark:bg-indigo-400/10">
         <ModalOverlay />
         <ModalContent
           className="bg-aqua-muted dark:bg-indigo-400 flex flex-col w-full max-h-[80vh] justify-center items-center align-middle prose"
         >
           <div
-            className="flex flex-col justify-between  text-slate-900 dark:text-snow rounded-2xl w-[74vw] max-w-6xl max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20"
+            className="flex flex-col justify-between text-slate-900 dark:text-snow rounded-2xl w-full max-w-6xl max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20"
           >
             <ModalHeader>
               <div
@@ -84,7 +77,7 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody
-              className="flex flex-col justify-start align-middle gap-y-6  text-charcoal dark:text-snow dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
+              className="flex flex-col justify-start align-middle gap-y-6  text-charcoal  dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
             >
               <div
                 className="relative mt-6"

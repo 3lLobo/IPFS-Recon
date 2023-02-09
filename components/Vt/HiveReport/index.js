@@ -32,33 +32,9 @@ export const HiveReport = ({ content }) => {
       </div>
     );
   }
-  //   return (
-  //     <div>
-  //       <div className="panel panel-info">
-  //         <div className="panel-heading">
-  //           <span>Summary</span>
-  //         </div>
-  //         <div className="panel-body">
-  //           <div className="row">
-  //             <div className="text-center col-md-6">
-  //               {content.message &&
-  //                 <dl className="dl-horizontal" >
-  //                   <h2>Message</h2>
-  //                   <p className="font-semibold">
-  //                     {content?.message}
-  //                   </p>
-  //                 </dl>}
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   )
-  // }
 
   return (
     <div
-    // className='flex flex-col justify-center items-center overflow-x-scroll w-full '
     >
       {stats &&
         <ProgressCircle stats={stats} total={total} others={others} />
@@ -67,7 +43,7 @@ export const HiveReport = ({ content }) => {
         <div className="flex justify-center text-xl font-bold text-charcoal dark:text-snow">
           <h2>VirusTotal Summary</h2>
         </div>
-        <div className="panel-body">
+        <div className="overflow-scroll scrollbar-hide">
           <div className="grid grid-flow-row ">
             <div className="text-center col-md-6 divide-y-4">
               {content.message &&

@@ -15,7 +15,7 @@ export default function HomeWrapper({ children }) {
     >
       <Head />
       <Header />
-      <main className="z-10 mb-auto sm:mx-20 overflow-auto scrollbar-hide">{children}</main>
+      <main className="z-10 sm:mx-20 overflow-auto scrollbar-hide">{children}</main>
       <footer className="sticky bottom-0 mb-0 mt-auto w-full text-left bg-gray-900 text-white text-xs flex pt-1 bg-slate-900 bg-opacity-60 z-10">
         <IpfsComponent />
         <div className="ml-auto text-center mx-3 flex">

@@ -37,7 +37,7 @@ export default function IpfsLs() {
   }, [isError, dispatch, toast, error, store.cid])
 
   return (
-    <Box className="absolute -top-9 flex flex-col w-full max-w-[30vw] overflow-y-clip">
+    <Box className="absolute -top-9 flex flex-col w-full sm:max-w-[30vw] overflow-y-clip ">
       {isLoading ? (
         <BezierSpinner></BezierSpinner>
       ) : (
@@ -62,7 +62,7 @@ export default function IpfsLs() {
                 />
               </div>
               <div
-                className="flex  sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10 max-w-[40vw]  max-h-[93vh] pt-60 pb-11"
+                className="flex sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10  max-h-[93vh] pt-60 pb-11"
               >{data &&
                 <>
                   {data?.map((file, i) => {

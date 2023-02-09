@@ -58,7 +58,7 @@ export const IpfsCard = ({ ls, idx }) => {
 
   return (
     <Box
-      className={`${bg} flex flex-col w-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+      className={`${bg} flex flex-col w-full min-w-[14rem] max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       onClick={onCardClick}
     >
       <ScanButton idx={idx} showButton={isSelect} />
