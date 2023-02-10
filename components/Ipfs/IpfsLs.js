@@ -44,7 +44,7 @@ export default function IpfsLs() {
         <AnimatePresence>
           <Box className="flex flex-col w-full ">
             <motion.div
-              className="sticky top-52 mt-0"
+              className="sticky top-52 mt-0 sm:mb-6"
               // initial={false}
               animate={(currentData && store.cid && store.selectedIdx.length === 0) ? 'visible' : 'hidden'}
               exit={{ opacity: 0 }}
@@ -56,7 +56,7 @@ export default function IpfsLs() {
             >
               <DopeAlter
                 headText="Select files."
-                bodyText="These are the files inside your CID. Select the files you want to inspect."
+                bodyText="These are the files inside your CID. Select the ones you want to inspect."
                 color="aqua"
                 show={true}
               />
