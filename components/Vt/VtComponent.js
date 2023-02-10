@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { DopeAlter } from "../Alert/dopeAlert";
 import { VtReport } from "./VtReport";
 import demoReport from "../../reduxApp/demoResHash.json";
+import { motion } from "framer-motion";
 
 
 export default function VtComponent() {
@@ -10,28 +11,44 @@ export default function VtComponent() {
 
   return (
     <div
-      className="flex flex-col justify-center items-center w-full h-full"
+      className="flex flex-col w-full sm:max-w-[30vw] overflow-y-clip "
     >
-      <DopeAlter headText="Reports" bodyText="Your reports for the Scanned files." show={store.reports.length > 0} color="aqua" />
       <div
-        className="grid grid-flow-row grid-cols-1 justify-center items-center gap-y-3 my-11"
-      >{store.reports.length > 0 &&
-        <>
-          {/* <VtReport key={111} name="test" idc={111} report={demoReport} fileCid="123123123" /> */}
-          {store.reports.map((report) => {
-            const { idx, fileName, data } = report
-            return (
-              <VtReport
-                key={idx}
-                name={fileName}
-                idc={idx}
-                report={data}
-              />
-            )
-          })}
+        className="max-w-4xl w-full h-full flex flex-col justify-center items-center mt-6 "
+      >
 
-        </>
-        }
+        <DopeAlter headText="Reports" bodyText="Your reports for the Scanned files." show={store.reports.length > 0} color="aqua" />
+      </div>
+      <div
+      >
+        <div
+          className="absolute top-[55vh] sm:-top-9 flex flex-col w-full sm:max-w-[30vw] overflow-y-clip max-h-[104vh]"
+        >
+
+          <motion.div
+            className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 mt-11 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-6 py-24 sm:py-60 max-h-[99vh] "
+            // className="flex sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10  max-h-[97vh] pt-60 "
+            initial={{ opacity: 0 }}
+            animate={store.reports.length > 0 ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+
+            {store.reports.map((report, i) => {
+              console.log(report)
+              const { idx, fileName, data, cid } = report
+              // console.log("CIDDD" + cid)
+              return (
+                <VtReport
+                  key={idx + fileName + i}
+                  name={fileName}
+                  idx={idx}
+                  fileCid={cid}
+                  report={data}
+                />
+              )
+            })}
+          </motion.div>
+        </div>
       </div>
     </div>
   )

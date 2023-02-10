@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/vt/hashReport/:path*',
+  //       headers: [
+  //         {
+  //           key: 'access-control-allow-origin',
+  //           value: '*',
+  //         },
+  //       ],
+  //     },
+  //   ]
+  // },
   async rewrites() {
     return [
       {
@@ -9,15 +22,25 @@ const nextConfig = {
           {
             type: 'header',
             key: 'x-apikey',
-            value: process.env.VT_APIKEY,
           },
-          {
-            type: 'header',
-            key: 'host',
-            value: 'www.virustotal.com',
-          }
+          //   {
+          //     type: 'header',
+          //     key: 'cookie',
+          //     value: '',
+          //   },
+          //   {
+          //     type: 'host',
+          //     value: ['localhost:3000', 'ipfs-recon.vercel.app'],
+          //   }
         ],
-        destination: 'https://www.virustotal.com/:path*', // Proxy to the Hive
+        destination: 'https://www.virustotal.com/:path*', // Proxy to VT
+        // missing: [
+        //   {
+        //     type: 'header',
+        //     key: 'access-control-allow-origin',
+        //     value: '*',
+        //   },
+        // ],
       },
     ]
   },

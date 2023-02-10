@@ -14,12 +14,13 @@ import Link from "next/link";
 import ReactTimeago from "react-timeago";
 import { HiveReport } from "./HiveReport";
 
+
 // Card which displays a short summry of the VT report. On click, it opens a modal with the full report.
 export const VtReport = ({ idx, name, report, fileCid }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
-  console.log("🚀report", beautify(report.data.attributes.last_analysis_stats, null, 2, 10));
+
 
   const bg = useColorModeValue('bg-snow-muted', 'ring-1 ring-slate-900 bg-aqua-muted ')
   const hoverStyle = ' bg-opacity-10 hover:bg-opacity-20 hover:scale-90'
@@ -27,67 +28,74 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
     <>
       <Box
         onClick={onOpen}
-        className={`${bg} flex flex-col w-full h-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+        className={`${bg} flex flex-col w-full h-full min-w-[11rem] max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       >
         <div className="flex flex-col justify-between px-3 py-6">
-          {/* <Text className="font-semibold">
-            Report for:
-          </Text> */}
           <div
-            className="flex flex-row justify-evenly"
+            className="flex flex-row  gap-3 justify-evenly"
           >
             <Icon as={IoAnalytics} className="text-2xl fill-aqua" />
-            <Text className="font-semibold text-sm" >
+            <Text className="font-semibold text-sm truncate" >
               {name}
             </Text>
           </div>
         </div>
-        {/* <Text fontSize="xs" color="gray.500">
-          {VtReport}
-        </Text> */}
-      </Box>
 
+      </Box>
       <Modal isOpen={isOpen} onClose={onClose} size="6xl" className="bg-snow dark:bg-indigo-400/10">
         <ModalOverlay />
         <ModalContent
           className="bg-aqua-muted dark:bg-indigo-400 flex flex-col w-full max-h-[80vh] justify-center items-center align-middle prose"
         >
           <div
-            className="flex flex-col justify-between  text-slate-900 dark:text-snow rounded-2xl w-[74vw] max-w-6xl max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20"
+            className="flex flex-col justify-between text-slate-900 dark:text-snow rounded-md w-full max-w-6xl max-h-[80vh] bg-right-top bg-gradient-to-b from-aqua/90 to-aqua/20 "
           >
             <ModalHeader>
               <div
-                className="flex flex-row justify-center items-center gap-x-4"
+                className="flex flex-col sm:flex-row justify-center items-center gap-4 "
               >
-                <Text className="font-semibold text-2xl">
+                <Text className="font-semibold text-2xl mb-0 sm:mb-9">
                   Report for:
                 </Text>
-                <div className="flex flex-col justify-center items-center">
-                  <div className="font-semibold text-sm">
-                    Filename:
-                    <span className="  dark:text-snow ml-3">
+                <div className="grid grid-rows-2 gap-y-6 font-semibold text-sm w-fit max-w-md">
+                  <div className="grid grid-flow-col grid-cols-6  sm:grid-cols-5">
+
+                    <div className="col-span-2 sm:col-span-1">
+                      Filename:
+                    </div>
+                    <span className="  dark:text-snow ml-3 col-span-4 truncate">
                       {name}
                     </span>
                   </div>
-                  {fileCid && (
-                    <div className="font-semibold text-sm">
+                  {/* {fileCid && ( */}
+                  <div className="grid grid-flow-col grid-cols-6 sm:grid-cols-5 ">
+
+                    <div className="font-semibold text-sm col-span-2  sm:col-span-1">
                       CID:
-                      <Link href={`https://ipfs.io/ipfs/${fileCid}`}>
-                        <span className=" text-charcoal dark:text-snow  ml-3">
+                    </div>
+                    <div
+                      className=" ml-3 truncate  col-span-4"
+                    >
+
+                      <Link href={`https://ipfs.io/ipfs/${fileCid}`} title={`https://ipfs.io/ipfs/${fileCid}`}>
+                        <span
+                          className="truncate hover:text-aqua"
+                        >
                           {fileCid}
                         </span>
                       </Link>
                     </div>
-                  )}
+                  </div>
+                  {/* )} */}
                 </div>
               </div>
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody
-              className="flex flex-col justify-start align-middle gap-y-6  text-charcoal dark:text-snow dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
+              className="flex flex-col justify-start align-middle gap-y-6  text-charcoal  dark:text-charcoal rounded-2xl w-full overflow-y-scroll scrollbar-hide "
             >
               <div
-                className="relative mt-6"
+                className="relative mt-11"
               >
                 <HiveReport content={report.data} />
               </div>

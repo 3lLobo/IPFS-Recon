@@ -12,7 +12,7 @@ const colors = {
 
 export const myTheme = extendTheme({
   colors,
-  initialColorMode: 'dark',
+  initialColorMode: 'light',
   // fonts: {
   //   heading: 'Manjari',
   //   body: 'Manjari',

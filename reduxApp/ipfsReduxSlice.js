@@ -36,13 +36,17 @@ export const ipfsReduxSlice = createSlice({
       state.cid = cid
     },
     selectFile: (state, action) => {
-      const { idx, file, name } = action.payload
+      const { idx, file, name, cid } = action.payload
       if (!state.selectedIdx.includes(idx)) {
         state.selectedIdx.push(idx)
         state.selectedFiles.push(file)
         state.selectedName.push(name)
         const filehash = md5(file)
-        state.selectedMd5.push(filehash)
+        const fileCid = cid.toString()
+        state.selectedMd5.push({
+          cid: fileCid,
+          md5hash: filehash,
+        })
       }
     },
     unselectFile: (state, action) => {
@@ -69,9 +73,11 @@ export const ipfsReduxSlice = createSlice({
       }
 
       const fileName = state.selectedName[state.selectedIdx.indexOf(idx)]
+      const cid = state.selectedMd5[state.selectedIdx.indexOf(idx)]?.cid || '☠️'
       const report = {
         data: data,
         fileName: fileName || "metaAaSpLoiT.exe",
+        cid: cid,
         idx: idx,
       }
       state.reports.push(report)

@@ -21,7 +21,7 @@ import DemoScanButton from './ScanButtonDemo'
 
 const maliciousFile = {
   name: 'metaAaSpLoiT.exe',
-  size: '11.3 kB',
+  size: '[DEMO]',
   type: 'application/x-msdownload',
 }
 
@@ -54,7 +54,7 @@ export const DemoIpfsCard = ({ md5Hash }) => {
 
   const hoverStyle = isSelect
     ? ' bg-opacity-20'
-    : ' bg-opacity-10 hover:bg-opacity-20 hover:scale-90'
+    : ' bg-opacity-20 hover:bg-opacity-20 hover:scale-90'
 
   const hiddenStyle = result.isLoading ? ' opacity-20' : ''
   const dimStyle = isSelect ? ' opacity-10' : ''
@@ -62,31 +62,36 @@ export const DemoIpfsCard = ({ md5Hash }) => {
 
   return (
     <Box
-      className={`${bg} flex flex-col w-full max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+      className={`${bg}  bg-red-muted flex flex-col w-full min-w-[18rem] max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       onClick={onCardClick}
     >
       <DemoScanButton md5Hash={md5Hash} showButton={isSelect} />
       {result.isLoading && (
         <div className="fixed z-40 justify-center ml-11">
           <BezierSpinner
-          // text={"DOWNLOADING..."}
           />
         </div>
       )}
       <div
-        className={`grid grid-flow-col grid-cols-2 prose-sm ${hiddenStyle}` + dimStyle}
+        className={`grid grid-flow-col grid-cols-3 text-sm prose ${hiddenStyle}` + dimStyle}
       >
-        <List className="w-full px-2 h-full">
+        <List className="w-full h-full grid grid-flow-row grid-rows-3 col-span-1">
           {attrs.map((attr, i) => {
             return (
-              <ListItem key={uuid()}>
-                <ListIcon as={IoSettings} className="fill-aqua" />
+              <ListItem
+                // p={0}
+                key={uuid()}
+              >
+                <ListIcon
+                  // p={0}
+                  my={0}
+                  as={IoSettings} className="fill-aqua" />
                 {attr + ':'}
               </ListItem>
             )
           })}
         </List>
-        <List className="w-full h-full col-span-1">
+        <List className="w-full h-full grid grid-flow-row grid-rows-3 my-0 col-span-2">
           {attrs.map((attr, i) => {
             return (
               <ListItem key={uuid()} className="truncate">
