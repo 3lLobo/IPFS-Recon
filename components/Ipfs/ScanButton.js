@@ -44,7 +44,8 @@ export default function ScanButton({ idx, showButton }) {
 
   const handleClick = async () => {
     console.log("Clicqq", idx)
-    // TODO: Compute md5 hash of file
+    if (isMutating) return
+    if (!showButton) return
     const fileIdx = store.selectedIdx.indexOf(idx)
     // checkFile({ file: store.selectedFiles[fileIdx] })
     hashCheckTrigger({ hash: store.selectedMd5[fileIdx].md5hash })
@@ -60,16 +61,16 @@ export default function ScanButton({ idx, showButton }) {
       exit={{ opacity: 0 }}
       transition={{ ease: "easeInOut", duration: .5 }}
       variants={{
-        visible: { opacity: 1, y: 0 },
-        hidden: { opacity: 0, y: 500 },
+        visible: { opacity: 1, },
+        hidden: { opacity: 0, },
       }}
     >
-      <Box className="absolute z-30 h-full w-full flex flex-col justify-center items-center -m-2">
+      <Box className="absolute z-30 h-full w-full flex flex-col justify-center items-center -m-2 " >
         <Button
           className="bg-gradient-to-r from-cyan-400 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 "
           onClick={handleClick}
           isLoading={isMutating}
-          disabled={isMutating}
+          disabled
           size="lg"
           colorScheme="aqua"
           variant="solid"
@@ -77,7 +78,8 @@ export default function ScanButton({ idx, showButton }) {
         >
           <Text className="text-snow">Scan file-hash</Text>
         </Button>
+
       </Box>
-    </motion.div>
+    </motion.div >
   )
 }

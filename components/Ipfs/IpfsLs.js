@@ -42,41 +42,63 @@ export default function IpfsLs() {
         <BezierSpinner></BezierSpinner>
       ) : (
         <AnimatePresence>
-          <motion.div
-            initial={false}
-            animate={(currentData && store.cid) ? 'visible' : 'hidden'}
-            exit={{ opacity: 0 }}
-            transition={{ ease: "easeInOut", duration: .5 }}
-            variants={{
-              visible: { opacity: 1, y: 0 },
-              hidden: { opacity: 0, y: 500 },
-            }}
-          >
-            <Box className="flex flex-col w-full ">
-              <div className="sticky top-52 mt-0">
-                <DopeAlter
-                  headText="Scan Data"
-                  bodyText="Select files to scan."
-                  color="aqua"
-                  show={store.selectedIdx.length === 0 && store.cid}
-                />
-              </div>
-              <div
-                className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-3 pt-64 max-h-[95vh] "
-              // className="flex sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10  max-h-[93vh] pt-60 pb-11"
-              >{data &&
-                <>
-                  {data?.map((file, i) => {
-                    return (
-                      <IpfsCard ls={file} idx={i} key={uuid()} />
-                    )
-                  })}
-                  <DemoIpfsCard md5Hash="193ef846f77e3c0770dd4db567258cde" />
-                </>
-                }
-              </div>
-            </Box>
-          </motion.div>
+          <Box className="flex flex-col w-full ">
+            <motion.div
+              className="sticky top-52 mt-0"
+              // initial={false}
+              animate={(currentData && store.cid && store.selectedIdx.length === 0) ? 'visible' : 'hidden'}
+              exit={{ opacity: 0 }}
+              transition={{ ease: "easeInOut", duration: .5 }}
+              variants={{
+                visible: { visibility: 'visible', y: 0 },
+                hidden: { visibility: 'hidden', y: 500 },
+              }}
+            >
+              <DopeAlter
+                headText="Select files."
+                bodyText="These are the files inside your CID. Select the files you want to inspect."
+                color="aqua"
+                show={true}
+              />
+            </motion.div>
+            <motion.div
+              className="sticky top-52 mt-0"
+              // initial={false}
+              animate={(store.selectedIdx.length > 0) ? 'visible' : 'hidden'}
+              exit={{ opacity: 0 }}
+              transition={{ ease: "easeInOut", duration: .5 }}
+              variants={{
+                visible: { visibility: 'visible', y: 0 },
+                hidden: { visibility: 'hidden', y: 500 },
+              }}
+            >
+              <DopeAlter
+                headText="Malware Scan."
+                bodyText="Click on 'Scan' to initiate a malware scan."
+                color="aqua"
+                show={true}
+              />
+            </motion.div>
+            <motion.div
+              className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-6 pt-36 max-h-[95vh] pb-20 "
+              initial={{ opacity: 0, x: -500 }}
+              animate={(data && store.cid) ? 'visible' : 'hidden'}
+              exit={{ opacity: 0 }}
+              transition={{ ease: "easeInOut", duration: .5 }}
+              variants={{
+                visible: { opacity: 1, x: 0 },
+                hidden: { opacity: 0, x: -500 },
+              }}
+            >
+
+              {data?.map((file, i) => {
+                return (
+                  <IpfsCard ls={file} idx={i} key={uuid()} />
+                )
+              })}
+              <DemoIpfsCard md5Hash="193ef846f77e3c0770dd4db567258cde" />
+            </motion.div>
+          </Box>
         </AnimatePresence>
       )
       }

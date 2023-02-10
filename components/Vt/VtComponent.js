@@ -14,7 +14,7 @@ export default function VtComponent() {
       className="flex flex-col w-full sm:max-w-[30vw] overflow-y-clip "
     >
       <div
-        className="max-w-4xl w-full h-full flex flex-col justify-center items-center mb-3 "
+        className="max-w-4xl w-full h-full flex flex-col justify-center items-center mt-6 "
       >
 
         <DopeAlter headText="Reports" bodyText="Your reports for the Scanned files." show={store.reports.length > 0} color="aqua" />
@@ -26,7 +26,7 @@ export default function VtComponent() {
         >
 
           <motion.div
-            className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 mt-11 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-3 pt-24 sm:py-60 max-h-[99vh] "
+            className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 mt-11 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-6 py-24 sm:py-60 max-h-[99vh] "
             // className="flex sm:flex-col overflow-y-scroll gap-y-3 scroll-smooth scrollbar-hide z-10  max-h-[97vh] pt-60 "
             initial={{ opacity: 0 }}
             animate={store.reports.length > 0 ? { opacity: 1 } : { opacity: 0 }}
