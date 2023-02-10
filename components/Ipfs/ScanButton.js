@@ -22,12 +22,13 @@ export default function ScanButton({ idx, showButton }) {
     if (hashCheckResult.isSuccess) {
       toast('success', 'File hash has records on VirusTotal! 👀', 'hashScanSuccess')
       console.log('🚀 hashCheckResult', hashCheckResult)
+      dispatch(addReport({ idx: idx, data: hashCheckResult.data }))
     }
     if (hashCheckResult.isError) {
       toast('error', 'File hash has not yet been reconed. Upload it for a scan! 🔍', 'hashScanError')
       console.log('🚀 scanError', hashCheckResult)
     }
-  }, [hashCheckResult, dispatch, toast])
+  }, [hashCheckResult, dispatch, toast, idx])
 
   useEffect(() => {
     if (isMutationSuccess) {
@@ -46,10 +47,10 @@ export default function ScanButton({ idx, showButton }) {
     // TODO: Compute md5 hash of file
     const fileIdx = store.selectedIdx.indexOf(idx)
     // checkFile({ file: store.selectedFiles[fileIdx] })
-    // hashCheckTrigger({ hash: store.selectedMd5[fileIdx] })
-    const res = await fetch(`http://localhost:3000/api/vt/hashReport/${store.selectedMd5[fileIdx]}`)
-    const data = await res.json()
-    dispatch(addReport({ idx: idx, data: data }))
+    hashCheckTrigger({ hash: store.selectedMd5[fileIdx].md5hash })
+    // const res = await fetch(`http://localhost:3000/api/vt/hashReport/${store.selectedMd5[fileIdx]}`)
+    // const data = await res.json()
+
   }
 
   return (

@@ -26,7 +26,7 @@ export const HiveReport = ({ content }) => {
     return (
       <div className="panel panel-danger" ng-if="!success">
         <div className="panel-heading">
-          <span>VirusTotal GetReport</span>
+          <span>VirusTotal Summary</span>
         </div>
         <div className="panel-body">{content.errorMessage}</div>
       </div>
@@ -54,7 +54,7 @@ export const HiveReport = ({ content }) => {
                   </span>
                 </dl>}
               {content.attributes.last_analysis_stats &&
-                <div className="grid grid-flow-col ">
+                <div className="grid grid-flow-row sm:grid-flow-col ">
                   <dl className="flex flex-col justify-center divide-y-4">
 
                     <h3>Malicious</h3>
@@ -75,9 +75,15 @@ export const HiveReport = ({ content }) => {
                     </p>
                   </dl>
                   <dl className="flex flex-col justify-center  divide-y-4">
-                    <h3>Last analysis date</h3>
+                    <h3>First sigthed</h3>
                     <p className="font-semibold">
-                      <ReactTimeago date={content.attributes.last_analysis_date} />
+                      <ReactTimeago date={content.attributes.first_submission_date * 1000} />
+                    </p>
+                  </dl>
+                  <dl className="flex flex-col justify-center  divide-y-4">
+                    <h3>Last analysis</h3>
+                    <p className="font-semibold">
+                      <ReactTimeago date={content.attributes.last_analysis_date * 1000} />
                     </p>
                   </dl>
                 </div>
@@ -93,14 +99,14 @@ export const HiveReport = ({ content }) => {
           </div>
           {content.attributes.names &&
             <div className="flex flex-col divide-y-4 gap-4">
-              <dl className="flex flex-col justify-center align-middle gap-4 text-center">
-                <h3>File-names with same hash</h3>
+              <dl className="flex flex-col justify-center align-middle text-center">
+                <h3>Filenames with same hash</h3>
                 <List
-                  className='grid grid-flow-col gap-4 divide-x-4 overflow-x-scroll scrollbar-hide h-fit bg-slate-600/50 rounded-xl p-2'
+                  className='grid grid-flow-col gap-2 divide-x-2 overflow-x-scroll scrollbar-hide h-fit bg-slate-600/50 rounded-full'
                 >
 
                   {content.attributes.names.map(name => (
-                    <li key={name + 'HiveReport'} className="col-span-1 truncate w-28 text-center text-snow" title={name}
+                    <li key={name + 'HiveReport'} className="col-span-1 truncate w-28 text-center text-snow text-sm" title={name}
                     >{name}</li>
                   ))}
                 </List>
@@ -111,10 +117,13 @@ export const HiveReport = ({ content }) => {
                   <p className="font-semibold">{content.attributes.url}</p>
                 </dl>}
               {(content.id && content.type != 'domain' && content.type != 'fqdn') &&
-                <dl className="flex flex-row justify-center gap-4 divide-x-4 text-snow bg-slate-600/50 rounded-full py-1">
-                  <span>SHA-256</span>
-                  <span className="pl-3 font-mono">{content.id}</span>
-                </dl>}
+                <div className="flex flex-col justify-center align-middle text-center">
+                  <h3>SHA-256</h3>
+                  <dl className="flex flex-row justify-center gap-4 divide-x-4 text-snow bg-slate-600/50 rounded-full py-1">
+                    <span className="pl-3 font-mono">{content.id}</span>
+                  </dl>
+                </div>
+              }
               {(content.id && (content.type == 'domain' || content.type == 'fqdn')) &&
                 <div className="col-md-6 text-center">
                   <dl className="flex flex-row justify-center gap-4">

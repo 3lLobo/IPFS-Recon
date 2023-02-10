@@ -25,23 +25,12 @@ const montserrat = Montserrat({
 
 export default function Home({ buckets }) {
   const store = useSelector((state) => state.ipfsRedux)
-  const cortxStore = useSelector((state) => state.cortx)
   const toast = useMyToast()
 
   return (
     <>
-      {cortxStore.selectedBucket && (
-        <div className="w-full h-full fixed top-0 left-0 bg-snow opacity-80 z-50">
-          <div className="top-1/2 my-0 mx-auto block relative">
-            {/* <p className="relative text-aqua text-xs font-bold ml-auto">UPLOADING...</p> */}
-            <div className="scale-300 transform-gpu">
-              <BezierSpinner />
-            </div>
-          </div>
-        </div>
-      )}
       <HomeWrapper>
-        <div className={"grid sm:grid-flow-col sm:grid-cols-5 w-full gap-3" + montserrat.className}>
+        <div className={"grid sm:grid-flow-col sm:grid-cols-5 w-full gap-3 xl:max-w-[120rem] xl:mx-auto " + montserrat.className}>
           <div
             className='py-3 flex flex-col flex-nowrap sm:py-11 text-sm sm:col-span-2 overflow-auto'
           >

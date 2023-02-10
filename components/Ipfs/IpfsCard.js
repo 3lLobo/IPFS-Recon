@@ -41,7 +41,7 @@ export const IpfsCard = ({ ls, idx }) => {
   useEffect(() => {
     if (result.isSuccess) {
       const name = ls['name'] || 'ukwn' + uuid().toString()
-      dispatch(selectFile({ idx, file: result.data, name }))
+      dispatch(selectFile({ idx, file: result.data, name, cid: ls.cid }))
     } else if (result.isError) {
       console.log('🚀 ~ file: IpfsCard.js ~ line 43 ~ useEffect ~ result.isError', result.isError)
       toast('error', 'Failed to download file 😥', 'IpfsDownError')
@@ -85,7 +85,7 @@ export const IpfsCard = ({ ls, idx }) => {
         <List className="w-full h-full col-span-1">
           {attrs.map((attr, i) => {
             return (
-              <ListItem key={uuid()} title={ls[attr]?.length > 11 ? ls[attr] : null} className="truncate">
+              <ListItem key={uuid()} title={ls[attr]} className="truncate">
                 {(attr === 'size' ? fileSize : ls[attr]) || 'unknown'}
               </ListItem>
             )

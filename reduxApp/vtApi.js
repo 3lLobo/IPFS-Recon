@@ -2,9 +2,7 @@
 
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react'
 import axios from 'axios'
-// import sdkApi from 'api'
 
-// const sdk = sdkApi('@virus-total/vt3.0')
 
 const axiosBaseQuery =
   (
@@ -18,6 +16,7 @@ const axiosBaseQuery =
           data,
           params: {
             ...params,
+            // withCredentials: false,
           },
           headers: {
             'x-apikey': 'xxx',
@@ -27,6 +26,7 @@ const axiosBaseQuery =
         return { data: result.data }
       } catch (axiosError) {
         let err = axiosError
+        console.error("AXIOS", { err })
         return {
           error: {
             status: err.response?.status,
@@ -41,12 +41,13 @@ const axiosBaseQuery =
 export const vtApi = createApi({
   reducerPath: 'vtApi',
   baseQuery: axiosBaseQuery({
-    baseUrl: '/virustotal/api/v3',
+    // baseUrl: '/virustotal/api/v3',
+    baseUrl: '/api/vt',
   }),
   endpoints: (builder) => ({
     checkHash: builder.query({
       query: ({ hash }) => ({
-        url: `/files/${hash}`,
+        url: `/hashReport/${hash}`,
         method: 'GET',
         headers: {
           'accept': 'application/json',

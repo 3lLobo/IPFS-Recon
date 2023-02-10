@@ -22,6 +22,7 @@ export default function DemoScanButton({ md5Hash, showButton }) {
     if (hashCheckResult.isSuccess) {
       toast('success', 'File hash has records on VirusTotal! 👀', 'hashScanSuccess')
       console.log('🚀 hashCheckResult', hashCheckResult)
+      dispatch(addReport({ idx: 111, data: hashCheckResult.data }))
     }
     if (hashCheckResult.isError) {
       toast('error', 'File hash has not yet been reconed. Upload it for a scan! 🔍', 'hashScanError')
@@ -46,10 +47,10 @@ export default function DemoScanButton({ md5Hash, showButton }) {
     // TODO: Compute md5 hash of file
     // const fileIdx = store.selectedIdx.indexOf(idx)
     // checkFile({ file: store.selectedFiles[fileIdx] })
-    // hashCheckTrigger({ hash: store.selectedMd5[fileIdx] })
-    const res = await fetch(`http://localhost:3000/api/vt/hashReport/${md5Hash}`)
-    const data = await res.json()
-    dispatch(addReport({ idx: 111, data: data }))
+    hashCheckTrigger({ hash: md5Hash })
+    // const res = await fetch(`http://localhost:3000/api/vt/hashReport/${md5Hash}`)
+    // const data = await res.json()
+
   }
 
   return (
