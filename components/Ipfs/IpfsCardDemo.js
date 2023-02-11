@@ -81,6 +81,7 @@ export const DemoIpfsCard = ({ md5Hash }) => {
               <ListItem
                 // p={0}
                 key={uuid()}
+                className="truncate"
               >
                 <ListIcon
                   // p={0}

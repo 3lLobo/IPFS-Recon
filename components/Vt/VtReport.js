@@ -28,7 +28,7 @@ export const VtReport = ({ idx, name, report, fileCid }) => {
     <>
       <Box
         onClick={onOpen}
-        className={`${bg} flex flex-col w-full h-full min-w-[11rem] max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
+        className={`${bg} flex flex-col sm:w-full h-full min-h-20 min-w-[11rem] sm:max-w-[20rem] p-2 mx-3 rounded-xl shadow-xl transform-gpu transition duration-300 ease-in-out hover:cursor-pointer ${hoverStyle}`}
       >
         <div className="flex flex-col justify-between px-3 py-6">
           <div

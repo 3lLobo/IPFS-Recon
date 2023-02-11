@@ -37,7 +37,7 @@ export default function IpfsInput() {
 
   return (
     <>
-      <Box className="mx-3 -mt-3 absolute top-28 z-40 w-full max-w-[20rem] sm:max-w-[30rem]">
+      <Box className="mx-3 sm:-mt-3 absolute top-6 sm:top-28 z-40 w-full max-w-[20rem] sm:max-w-[28vw] xl:max-w-[30rem]">
         <DopeAlter headText={'Paste your IPFS CID:'} color={'aqua'} show={!store.cid} />
         <div>
           <InputGroup
@@ -52,6 +52,7 @@ export default function IpfsInput() {
               h="7"
               rounded="xl"
               // fontWeight="black"
+              // className='absolute'
               onChange={(e) => handleInput(e)}
               placeholder={store.cid || '<myCID>'}
               size="xs"

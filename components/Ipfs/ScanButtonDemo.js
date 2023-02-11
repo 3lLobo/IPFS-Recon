@@ -76,7 +76,7 @@ export default function DemoScanButton({ md5Hash, showButton }) {
           variant="solid"
           leftIcon={<IoSettings fill='snow' />}
         >
-          <Text className="text-snow">Scan file-hash</Text>
+          <Text className="text-snow">Scan</Text>
         </Button>
       </Box>
     </motion.div>
