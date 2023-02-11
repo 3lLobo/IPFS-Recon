@@ -11,12 +11,12 @@ export default function HomeWrapper({ children }) {
 
   return (
     <div
-      className={`h-screen flex flex-col justify-between bg-fixed ${store.mode} ${bg}`}
+      className={`h-screen w-max-[100vw] max-h-screen overflow-clip  flex flex-col justify-between bg-fixed ${store.mode} ${bg}`}
     >
       <Head />
       <Header />
       <main
-        className="z-10 sm:mx-20 overflow-auto scrollbar-hide "
+        className="relative z-10 w-full scrollbar-hide "
       >
         {children}
       </main>

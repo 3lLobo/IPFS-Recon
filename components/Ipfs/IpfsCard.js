@@ -72,20 +72,20 @@ export const IpfsCard = ({ ls, idx }) => {
       onClick={onCardClick}
     >
       <ScanButton idx={idx} showButton={isSelect} />
-      {result.isLoading && (
-        <div className="fixed z-40 justify-center ml-11">
+      {/* {!result.isLoading && (
+        <div className="absolute z-40 justify-center w-full h-full ">
           <BezierSpinner
           // text={"DOWNLOADING..."}
           />
         </div>
-      )}
+      )} */}
       <div
-        className={`grid grid-flow-col grid-cols-3 text-sm prose  ${hiddenStyle}` + dimStyle}
+        className={`grid grid-flow-col grid-cols-3 text-sm prose py-1 ${hiddenStyle}` + dimStyle}
       >
-        <List className="w-full h-full grid grid-flow-row grid-rows-3 col-span-1">
+        <List className="w-full h-full grid grid-flow-row grid-rows-3 col-span-1 ">
           {attrs.map((attr, i) => {
             return (
-              <ListItem key={uuid()}>
+              <ListItem key={uuid()} className="truncate" m={0}>
                 <ListIcon my={0} as={IoSettings} className="fill-aqua" />
                 {attr + ':'}
               </ListItem>

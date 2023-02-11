@@ -30,14 +30,14 @@ export default function Home({ buckets }) {
   return (
     <>
       <HomeWrapper>
-        <div className={"grid sm:grid-flow-col sm:grid-cols-5 w-full gap-3 xl:max-w-[120rem] xl:mx-auto " + montserrat.className}>
+
+        <div className={"grid sm:grid-flow-col sm:grid-cols-6 w-full gap-3 xl:gap-20 xl:max-w-[120rem] sm:px-10 xl:px-40 justify-center items-center" + montserrat.className}>
           <div
-            className='py-3 flex flex-col flex-nowrap sm:py-11 text-sm sm:col-span-2 overflow-auto'
+            className='row-span-1 sm:h-full text-sm sm:col-span-3 overflow-auto'
           >
-            <IpfsInput />
             <IpfsLs />
           </div>
-          <div className="mt-[45vh] sm:col-span-3 flex flex-col justify-center items-center sm:mt-11 overflow-auto">
+          <div className="mt-[10rem] row-span-1 h-fit sm:col-span-3 flex flex-col justify-center items-center sm:mt-11 overflow-auto">
             <VtComponent />
           </div>
         </div>

@@ -20,6 +20,7 @@ import { DopeAlter } from '../Alert/dopeAlert'
 import { motion, AnimatePresence } from 'framer-motion'
 import { skipToken } from '@reduxjs/toolkit/dist/query'
 import { DemoIpfsCard } from './IpfsCardDemo'
+import IpfsInput from './IpfsInput'
 
 export default function IpfsLs() {
   const store = useSelector((state) => state.ipfsRedux)
@@ -37,50 +38,50 @@ export default function IpfsLs() {
   }, [isError, dispatch, toast, error, store.cid])
 
   return (
-    <Box className="absolute -top-9 flex flex-col w-full sm:max-w-[30vw] overflow-y-clip max-h-[104vh] ">
+    <div className="w-full overflow-y-clip mt-11 ">
+      <IpfsInput />
       {isLoading ? (
         <BezierSpinner></BezierSpinner>
       ) : (
         <AnimatePresence>
-          <Box className="flex flex-col w-full ">
+          <div
+            className="mt-0 w-full h-full"
+          >
+
+            {/* <Box className="flex flex-col w-full "> */}
             <motion.div
-              className="sticky top-52 mt-0 sm:mb-6"
               // initial={false}
-              animate={(currentData && store.cid && store.selectedIdx.length === 0) ? 'visible' : 'hidden'}
-              exit={{ opacity: 0 }}
+              className='w-full h-full mt-32 sm:mt-0 xl:mt-52'
+              animate={(currentData && store.cid) ? 'visible' : 'hidden'}
+              exit={{ opacity: 0, }}
               transition={{ ease: "easeInOut", duration: .5 }}
               variants={{
                 visible: { visibility: 'visible', y: 0 },
                 hidden: { visibility: 'hidden', y: 500 },
               }}
             >
-              <DopeAlter
-                headText="Select files."
-                bodyText="These are the files inside your CID. Select the ones you want to inspect."
-                color="aqua"
-                show={true}
-              />
+              {store.selectedIdx.length === 0 ?
+                <DopeAlter
+                  headText="Select files."
+                  bodyText="These are the files inside your CID. Select the ones you want to inspect."
+                  color="aqua"
+                  show={true}
+                />
+                :
+                <DopeAlter
+                  headText="Malware Scan."
+                  bodyText="Click on 'Scan' to initiate a malware scan."
+                  color="aqua"
+                  show={true}
+                />}
             </motion.div>
+          </div>
+          <div
+            className='absolute  sm:-top-9 w-full sm:max-w-[35vw] overflow-y-clip max-h-[60vw] sm:h-[102vh] sm:max-h-[122rem] justify-center items-center -mx-6  max-w-[100vw] overflow-clip'
+          >
+
             <motion.div
-              className="sticky top-52 mt-0"
-              // initial={false}
-              animate={(store.selectedIdx.length > 0) ? 'visible' : 'hidden'}
-              exit={{ opacity: 0 }}
-              transition={{ ease: "easeInOut", duration: .5 }}
-              variants={{
-                visible: { visibility: 'visible', y: 0 },
-                hidden: { visibility: 'hidden', y: 500 },
-              }}
-            >
-              <DopeAlter
-                headText="Malware Scan."
-                bodyText="Click on 'Scan' to initiate a malware scan."
-                color="aqua"
-                show={true}
-              />
-            </motion.div>
-            <motion.div
-              className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-6 pt-36 max-h-[95vh] pb-20 "
+              className="grid grid-flow-col sm:grid-flow-row sm:grid-cols-1 gap-3 overflow-x-scroll sm:overflow-y-scroll scrollbar-hide px-6 sm:px-0 xl:px-6 pb-6 sm:pt-[22rem] xl:py-[30vh]  "
               initial={{ opacity: 0, x: -500 }}
               animate={(data && store.cid) ? 'visible' : 'hidden'}
               exit={{ opacity: 0 }}
@@ -98,10 +99,10 @@ export default function IpfsLs() {
               })}
               <DemoIpfsCard md5Hash="193ef846f77e3c0770dd4db567258cde" />
             </motion.div>
-          </Box>
+          </div>
         </AnimatePresence>
       )
       }
-    </Box >
+    </div >
   )
 }
