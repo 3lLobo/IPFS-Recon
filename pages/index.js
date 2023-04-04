@@ -13,7 +13,7 @@ import { Text } from '@chakra-ui/layout'
 import { v4 } from 'uuid'
 import { Button } from '@chakra-ui/button'
 import { DopeAlter } from '../components/Alert/dopeAlert'
-import { Montserrat, Montserrat_Alternates, Poppins } from '@next/font/google'
+import { Montserrat, Montserrat_Alternates, Poppins } from 'next/font/google'
 import VtComponent from '../components/Vt/VtComponent'
 
 
